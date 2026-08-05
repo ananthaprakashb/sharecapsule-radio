@@ -11,6 +11,8 @@ test("latest episode satisfies the publication contract", async () => {
   assert.ok(episode.stocks.length >= 3);
   assert.ok(episode.stocks.every((stock) => stock.score >= 0 && stock.score <= 100));
   assert.ok(episode.mode === "demo" || episode.mode === "mock" || episode.audioUrl);
+  assert.match(episode.narration, /educational and informational purposes/i);
+  assert.match(episode.narration, /not responsible for decisions/i);
 });
 
 test("publication configuration uses the intended India schedule", async () => {

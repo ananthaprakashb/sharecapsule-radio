@@ -11,6 +11,7 @@ ShareCapsule Radio is a morning-market audio interface and publication pipeline 
 - Podcast RSS generation guarded by a verified audio URL
 - GitHub Actions schedules for primary collection, Asia refresh and validated publication
 - CI checks for the site and publication contract
+- Mandatory spoken and on-page educational-purpose disclaimer
 
 ## Local development
 
@@ -38,4 +39,4 @@ Deploy the application to the selected host, add `radio.sharecapsule.app` as its
 
 ## Editorial safeguards
 
-The pipeline is evidence-first: collection produces a source archive before narration is generated. Social and search signals may influence popularity but must not serve as the only source for a material claim. Financial commentary is informational and should be reviewed against applicable local requirements before enabling automatic publication.
+The pipeline is evidence-first: collection produces a source archive before narration is generated. Social and search signals may influence popularity but must not serve as the only source for a material claim. A fixed educational-purpose and listener-responsibility disclaimer is appended after script generation and before TTS, so a script provider cannot omit it. Financial commentary should be reviewed against applicable local requirements before enabling automatic publication.

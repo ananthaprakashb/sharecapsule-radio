@@ -5,6 +5,13 @@ import process from "node:process";
 const root = process.cwd();
 const stage = process.argv.find((arg) => arg.startsWith("--stage="))?.split("=")[1] ?? "all";
 const allowedStages = new Set(["primary", "refresh", "publish", "all"]);
+const SPOKEN_DISCLAIMER =
+  "ShareCapsule Radio is provided solely for educational and informational purposes. " +
+  "Nothing in this broadcast is investment, financial, legal, or tax advice. " +
+  "Listeners remain solely responsible for their financial decisions. " +
+  "ShareCapsule Radio and its publishers are not responsible for decisions, trades, losses, " +
+  "or other outcomes based on this broadcast. Please do your own research and consult a " +
+  "qualified financial professional when appropriate.";
 
 if (!allowedStages.has(stage)) {
   throw new Error(`Unknown stage: ${stage}`);
@@ -60,12 +67,19 @@ const postJson = async (url, token, body) => {
 };
 
 const validateEpisode = (episode) => {
-  const fields = ["episodeDate", "title", "dataCutoff", "markets", "drivers", "stocks"];
+  const fields = ["episodeDate", "title", "dataCutoff", "narration", "markets", "drivers", "stocks"];
   for (const field of fields) {
     if (!episode[field]) throw new Error(`Episode is missing ${field}`);
   }
   if (!Array.isArray(episode.markets) || !Array.isArray(episode.stocks)) {
     throw new Error("markets and stocks must be arrays");
+  }
+  const narration = String(episode.narration).toLowerCase();
+  if (
+    !narration.includes("educational and informational purposes") ||
+    !narration.includes("not responsible for decisions")
+  ) {
+    throw new Error("Episode narration is missing the mandatory spoken disclaimer");
   }
   if (episode.mode === "production" && !episode.audioUrl) {
     throw new Error("Production publication requires an audioUrl");
@@ -121,13 +135,14 @@ const buildProductionEpisode = async (evidence) => {
     process.env.SCRIPT_GENERATOR_TOKEN,
     { evidence, publication: config, episodeDate },
   );
+  const narration = `${String(draft.narration ?? "").trim()} ${SPOKEN_DISCLAIMER}`.trim();
   const audio = await postJson(
     required("TTS_URL"),
     process.env.TTS_TOKEN,
-    { title: draft.title, narration: draft.narration, episodeDate },
+    { title: draft.title, narration, episodeDate },
   );
   if (!audio.audioUrl) throw new Error("TTS adapter did not return audioUrl");
-  return { ...draft, ...audio };
+  return { ...draft, ...audio, narration };
 };
 
 let next = {

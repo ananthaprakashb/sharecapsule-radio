@@ -62,6 +62,22 @@ export default function Home() {
         </aside>
       )}
 
+      <section className="education-disclaimer" aria-labelledby="education-disclaimer-title">
+        <p className="eyebrow">IMPORTANT LISTENER NOTICE</p>
+        <div>
+          <h2 id="education-disclaimer-title">Education, not investment advice.</h2>
+          <p>
+            ShareCapsule Radio is provided solely for educational and
+            informational purposes. Nothing on this page or in any broadcast is
+            investment, financial, legal or tax advice. Listeners remain solely
+            responsible for their financial decisions. ShareCapsule Radio and
+            its publishers are not responsible for decisions, trades, losses or
+            other outcomes based on this content. Please do your own research
+            and consult a qualified financial professional when appropriate.
+          </p>
+        </div>
+      </section>
+
       <section className="market-strip" id="markets" aria-label="World markets">
         {episode.markets.map((market) => (
           <article key={market.symbol}>
@@ -175,8 +191,8 @@ export default function Home() {
           <span><strong>ShareCapsule</strong><small>RADIO</small></span>
         </div>
         <p>
-          Market commentary for information and education. Not investment
-          advice. Verify data before acting.
+          Educational and informational content only. Not investment advice.
+          Listeners remain responsible for their financial decisions.
         </p>
         <div>
           <a href="/feed.xml">RSS</a>

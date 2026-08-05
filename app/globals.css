@@ -132,6 +132,19 @@ nav a:hover, nav a:focus-visible, footer a:hover, footer a:focus-visible { color
 .demo-notice { margin: 0 4vw 28px; padding: 14px 18px; display: flex; gap: 16px; align-items: baseline; border: 1px solid rgba(255,122,69,.35); color: #d7d8d0; font-size: 12px; }
 .demo-notice strong { color: var(--orange); text-transform: uppercase; font: 600 10px/1 var(--font-geist-mono), monospace; letter-spacing: 1.2px; }
 
+.education-disclaimer {
+  margin: 0 4vw 42px;
+  padding: 30px 34px;
+  display: grid;
+  grid-template-columns: minmax(180px, .45fr) minmax(0, 1.55fr);
+  gap: 42px;
+  border: 1px solid rgba(216,255,62,.42);
+  background: rgba(216,255,62,.055);
+}
+.education-disclaimer .eyebrow { margin: 4px 0 0; }
+.education-disclaimer h2 { margin: 0 0 13px; font-size: 22px; letter-spacing: -.6px; }
+.education-disclaimer p:not(.eyebrow) { margin: 0; max-width: 980px; color: #c5c7be; font-size: 13px; line-height: 1.7; }
+
 .market-strip { display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .market-strip article { padding: 22px 26px; display: grid; grid-template-columns: 1fr auto; gap: 7px 12px; border-right: 1px solid var(--line); }
 .market-strip article:last-child { border: 0; }
@@ -213,6 +226,7 @@ footer > div:last-child { display: flex; justify-self: end; gap: 20px; }
   .play-button { width: 60px; height: 60px; }
   .waveform { height: 70px; gap: 2px; }
   .demo-notice { align-items: flex-start; flex-direction: column; gap: 6px; }
+  .education-disclaimer { grid-template-columns: 1fr; gap: 16px; padding: 24px 20px; }
   .market-strip { grid-template-columns: repeat(2, 1fr); }
   .market-strip article:nth-child(2n) { border-right: 0; }
   .content-grid, .stocks-section, .archive-section { padding: 75px 5vw; }

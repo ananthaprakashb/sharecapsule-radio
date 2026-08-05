@@ -7,6 +7,7 @@
 - Never describe mock or illustrative values as live market data.
 - Production publication must stop when audio, evidence, market freshness, or schema validation fails.
 - Keep the public disclaimer and data-cutoff timestamp visible.
+- Append the mandatory educational-purpose and listener-responsibility disclaimer to every spoken narration before TTS generation.
 
 ## Validation
 
