@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ShareCapsule Radio</title>
+    <link>https://radio.sharecapsule.app</link>
+    <description>Global markets, active stocks and the signals shaping the Indian market morning.</description>
+    <language>en-IN</language>
+    <atom:link href="https://radio.sharecapsule.app/feed.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

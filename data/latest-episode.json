@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "mode": "mock",
+  "episodeNumber": 1,
+  "episodeDate": "2026-08-05",
+  "displayDate": "05 AUG 2026",
+  "generatedAt": "2026-08-05T06:33:25.800Z",
+  "dataCutoff": "05:45 IST",
+  "title": "Global Market Morning",
+  "duration": "11:42",
+  "audioUrl": "",
+  "summary": "Global risk appetite is steady but selective. Rates, crude oil and the early Asian session form the main cross-asset setup, while high-volume technology and financial names lead the activity watch.",
+  "narration": "Good morning. This is ShareCapsule Radio. Global risk appetite is steady but selective. Rates, crude oil, and the early Asian session form today's main cross asset setup. This demonstration uses illustrative figures and is not live market data or investment advice.",
+  "riskSignal": "BALANCED",
+  "markets": [
+    {
+      "symbol": "SPX",
+      "label": "S&P 500",
+      "value": "6,312",
+      "change": 0.42
+    },
+    {
+      "symbol": "NDX",
+      "label": "NASDAQ 100",
+      "value": "23,184",
+      "change": 0.71
+    },
+    {
+      "symbol": "STOXX",
+      "label": "EURO STOXX",
+      "value": "5,438",
+      "change": -0.18
+    },
+    {
+      "symbol": "NIKKEI",
+      "label": "NIKKEI",
+      "value": "40,612",
+      "change": 0.36
+    },
+    {
+      "symbol": "BRENT",
+      "label": "BRENT",
+      "value": "$73.21",
+      "change": -0.54
+    },
+    {
+      "symbol": "GOLD",
+      "label": "GOLD",
+      "value": "$2,418",
+      "change": 0.22
+    }
+  ],
+  "drivers": [
+    {
+      "title": "Rates set the valuation tone",
+      "detail": "Track the direction of long-duration sovereign yields and the dollar before treating equity futures as a durable signal."
+    },
+    {
+      "title": "Asia provides the second read",
+      "detail": "The 05:45 IST refresh captures early Asian breadth and index futures that are unavailable in the primary 03:00 IST collection."
+    },
+    {
+      "title": "Oil remains an inflation transmission channel",
+      "detail": "A sustained crude move can influence domestic inflation expectations, currency sensitivity and sector leadership."
+    },
+    {
+      "title": "Company-specific catalysts dominate active names",
+      "detail": "Earnings, guidance, filings and unusual volume receive more weight than unverified social-media attention."
+    }
+  ],
+  "signals": [
+    {
+      "label": "US breadth",
+      "value": "MIXED"
+    },
+    {
+      "label": "Dollar",
+      "value": "FIRM"
+    },
+    {
+      "label": "Crude",
+      "value": "SOFTER"
+    },
+    {
+      "label": "Asia open",
+      "value": "STABLE"
+    }
+  ],
+  "stocks": [
+    {
+      "symbol": "RELIANCE",
+      "name": "Reliance Industries",
+      "score": 88,
+      "reason": "High turnover, index weight and energy sensitivity place it near the top of the attention queue.",
+      "tags": [
+        "turnover",
+        "oil",
+        "index"
+      ]
+    },
+    {
+      "symbol": "HDFCBANK",
+      "name": "HDFC Bank",
+      "score": 84,
+      "reason": "Liquidity, financial-sector influence and sensitivity to rate expectations support continued monitoring.",
+      "tags": [
+        "volume",
+        "rates",
+        "banking"
+      ]
+    },
+    {
+      "symbol": "TCS",
+      "name": "Tata Consultancy Services",
+      "score": 79,
+      "reason": "Currency moves and global technology sentiment are the principal overnight transmission factors.",
+      "tags": [
+        "technology",
+        "fx",
+        "global"
+      ]
+    },
+    {
+      "symbol": "TATAMOTORS",
+      "name": "Tata Motors",
+      "score": 76,
+      "reason": "Elevated realized volatility and global auto headlines make it a candidate for the morning briefing.",
+      "tags": [
+        "volatility",
+        "auto",
+        "news"
+      ]
+    }
+  ]
+}
