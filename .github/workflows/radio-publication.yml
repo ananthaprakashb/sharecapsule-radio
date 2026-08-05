@@ -2,9 +2,14 @@ name: Radio publication
 
 on:
   schedule:
-    - cron: "30 21 * * *" # 03:00 IST next day: primary collection
-    - cron: "15 0 * * *"  # 05:45 IST: Asia refresh and episode preparation
-    - cron: "45 0 * * *"  # 06:15 IST: validated publication
+    # GitHub cron is UTC. Each Pacific stage has PDT and PST candidates;
+    # the Choose stage guard runs only the candidate matching local Pacific time.
+    - cron: "0 10 * * *"  # 03:00 PDT primary collection
+    - cron: "0 11 * * *"  # 03:00 PST primary collection
+    - cron: "15 10 * * *" # 03:15 PDT episode preparation
+    - cron: "15 11 * * *" # 03:15 PST episode preparation
+    - cron: "30 10 * * *" # 03:30 PDT validated publication
+    - cron: "30 11 * * *" # 03:30 PST validated publication
   workflow_dispatch:
     inputs:
       stage:
@@ -38,37 +43,62 @@ jobs:
       TTS_TOKEN: ${{ secrets.TTS_TOKEN }}
       AUDIO_PUBLIC_BASE_URL: ${{ vars.AUDIO_PUBLIC_BASE_URL }}
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-
       - name: Choose stage
         id: stage
         shell: bash
         run: |
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            stage="${{ inputs.stage }}"
-          elif [[ "${{ github.event.schedule }}" == "30 21 * * *" ]]; then
-            stage="primary"
-          elif [[ "${{ github.event.schedule }}" == "15 0 * * *" ]]; then
-            stage="refresh"
-          else
-            stage="publish"
+            echo "stage=${{ inputs.stage }}" >> "$GITHUB_OUTPUT"
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
+
+          schedule="${{ github.event.schedule }}"
+          case "$schedule" in
+            "0 10 * * *"|"0 11 * * *")
+              stage="primary"
+              expected_time="03:00"
+              ;;
+            "15 10 * * *"|"15 11 * * *")
+              stage="refresh"
+              expected_time="03:15"
+              ;;
+            *)
+              stage="publish"
+              expected_time="03:30"
+              ;;
+          esac
+
+          local_time="$(TZ=America/Los_Angeles date +%H:%M)"
           echo "stage=$stage" >> "$GITHUB_OUTPUT"
+          if [[ "$local_time" == "$expected_time" ]]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+            echo "Skipping inactive UTC candidate; Pacific time is $local_time."
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.stage.outputs.should_run == 'true'
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        if: steps.stage.outputs.should_run == 'true'
+        with:
+          node-version: 22
+          cache: npm
 
       - name: Generate publication artifacts
+        if: steps.stage.outputs.should_run == 'true'
         run: node scripts/run-radio-pipeline.mjs --stage=${{ steps.stage.outputs.stage }}
 
       - name: Validate generated data
+        if: steps.stage.outputs.should_run == 'true'
         run: node --test tests/pipeline.test.mjs
 
       - name: Commit publication update
+        if: steps.stage.outputs.should_run == 'true'
         shell: bash
         run: |
           if git diff --quiet; then
@@ -78,5 +108,5 @@ jobs:
           git config user.name "sharecapsule-radio-bot"
           git config user.email "radio-bot@users.noreply.github.com"
           git add data public/feed.xml
-          git commit -m "publish: update morning radio briefing"
+          git commit -m "publish: update U.S. morning radio briefing"
           git push
