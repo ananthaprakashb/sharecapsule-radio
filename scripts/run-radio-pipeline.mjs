@@ -44,8 +44,14 @@ const required = (name) => {
 };
 
 const getJson = async (url, token) => {
+  const marketFocus = config.marketFocus ?? {};
   const response = await fetch(url, {
-    headers: token ? { Authorization: `Bearer ${token}` } : {},
+    headers: {
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      "X-ShareCapsule-Market": marketFocus.region ?? "US",
+      "X-ShareCapsule-Indexes": (marketFocus.indexes ?? []).join(","),
+      "X-ShareCapsule-Symbols": (marketFocus.prioritySymbols ?? []).join(","),
+    },
     signal: AbortSignal.timeout(20_000),
   });
   if (!response.ok) throw new Error(`Provider request failed with HTTP ${response.status}`);
@@ -114,8 +120,8 @@ const publishFeed = async (episode) => {
   <channel>
     <title>ShareCapsule Radio</title>
     <link>${baseUrl}</link>
-    <description>Global markets, active stocks and the signals shaping the Indian market morning.</description>
-    <language>en-IN</language>
+    <description>U.S. markets, active stocks and the global signals shaping the U.S. trading day.</description>
+    <language>en-US</language>
     <atom:link href="${baseUrl}/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <guid isPermaLink="false">sharecapsule-radio-${episode.episodeDate}</guid>
@@ -172,13 +178,13 @@ if (stage === "refresh" || stage === "all") {
       episodeDate,
       displayDate,
       generatedAt: now.toISOString(),
-      dataCutoff: "05:45 IST",
+      dataCutoff: `${config.episodeBuild} PT`,
       mode: "production",
     };
   } else {
-    next = { ...next, dataCutoff: "05:45 IST" };
+    next = { ...next, dataCutoff: `${config.episodeBuild} PT` };
   }
-  console.log("Asia and cross-asset refresh completed.");
+  console.log("U.S. pre-market and global-context refresh completed.");
 }
 
 if (stage === "refresh" || stage === "all") {
