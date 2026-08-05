@@ -1,9 +1,37 @@
 {
-  "timezone": "Asia/Kolkata",
+  "timezone": "America/Los_Angeles",
   "primaryCollection": "03:00",
-  "asiaRefresh": "05:45",
-  "publishAt": "06:15",
+  "episodeBuild": "03:15",
+  "publishAt": "03:30",
   "canonicalBaseUrl": "https://radio.sharecapsule.app",
+  "marketFocus": {
+    "region": "US",
+    "currency": "USD",
+    "exchanges": ["NYSE", "NASDAQ", "CBOE"],
+    "indexes": ["SPX", "NDX", "DJI", "RUT", "VIX"],
+    "prioritySymbols": [
+      "AAPL",
+      "MSFT",
+      "NVDA",
+      "AMZN",
+      "META",
+      "GOOGL",
+      "TSLA",
+      "AMD",
+      "NFLX",
+      "PLTR"
+    ],
+    "selectionSignals": [
+      "relativeVolume",
+      "realizedVolatility",
+      "premarketMove",
+      "optionsActivity",
+      "earningsAndGuidance",
+      "regulatoryAndCompanyNews",
+      "searchAndSocialInterest"
+    ],
+    "includeGlobalContext": true
+  },
   "maxStocks": 8,
   "minimumEvidencePerMaterialClaim": 1,
   "requireTwoSourcesForUnverifiedMaterialClaims": true,
