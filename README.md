@@ -1,6 +1,6 @@
 # ShareCapsule Radio
 
-ShareCapsule Radio is a morning-market audio interface and publication pipeline for `radio.sharecapsule.app`. It runs a 03:00 IST primary collection, a 05:45 IST Asian-market refresh and episode build, and a separate 06:15 IST publication gate.
+ShareCapsule Radio is a U.S.-market audio interface and publication pipeline for `radio.sharecapsule.app`. It collects data at 03:00 America/Los_Angeles local time, prepares the episode at 03:15, and applies the publication gate at 03:30. The workflow follows Pacific daylight-saving changes automatically.
 
 ## What is included
 
@@ -9,7 +9,7 @@ ShareCapsule Radio is a morning-market audio interface and publication pipeline 
 - Provider-neutral market-data and news collection endpoints
 - Evidence archive for every pipeline run
 - Podcast RSS generation guarded by a verified audio URL
-- GitHub Actions schedules for primary collection, Asia refresh and validated publication
+- GitHub Actions schedules for Pacific-time U.S. collection, episode preparation and validated publication
 - CI checks for the site and publication contract
 - Mandatory spoken and on-page educational-purpose disclaimer
 
@@ -29,7 +29,7 @@ node --test tests/pipeline.test.mjs
 
 ## Production configuration
 
-Copy the names in `.env.example` into GitHub Actions variables and secrets. Set `RADIO_MODE=production` only after the market-data, news, script-generation, TTS and audio-storage adapters return the normalized contract expected by `scripts/run-radio-pipeline.mjs`.
+Copy the names in `.env.example` into GitHub Actions variables and secrets. Configure the market-data and news endpoints for U.S.-listed securities and the U.S. index universe in `config/publication.json`. Set `RADIO_MODE=production` only after the market-data, news, script-generation, TTS and audio-storage adapters return the normalized contract expected by `scripts/run-radio-pipeline.mjs`.
 
 The default configuration keeps `autoPublish` disabled. A production episode must have a verified `audioUrl` before an RSS item is emitted.
 
