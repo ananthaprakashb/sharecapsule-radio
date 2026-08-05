@@ -1,0 +1,11 @@
+{
+  "timezone": "Asia/Kolkata",
+  "primaryCollection": "03:00",
+  "asiaRefresh": "05:45",
+  "publishAt": "06:15",
+  "canonicalBaseUrl": "https://radio.sharecapsule.app",
+  "maxStocks": 8,
+  "minimumEvidencePerMaterialClaim": 1,
+  "requireTwoSourcesForUnverifiedMaterialClaims": true,
+  "autoPublish": false
+}

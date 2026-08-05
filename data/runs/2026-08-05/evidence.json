@@ -1,0 +1,66 @@
+{
+  "collectedAt": "2026-08-05T06:50:10.563Z",
+  "stage": "all",
+  "marketPayload": {
+    "status": "mock",
+    "items": [
+      {
+        "symbol": "SPX",
+        "label": "S&P 500",
+        "value": "6,312",
+        "change": 0.42
+      },
+      {
+        "symbol": "NDX",
+        "label": "NASDAQ 100",
+        "value": "23,184",
+        "change": 0.71
+      },
+      {
+        "symbol": "STOXX",
+        "label": "EURO STOXX",
+        "value": "5,438",
+        "change": -0.18
+      },
+      {
+        "symbol": "NIKKEI",
+        "label": "NIKKEI",
+        "value": "40,612",
+        "change": 0.36
+      },
+      {
+        "symbol": "BRENT",
+        "label": "BRENT",
+        "value": "$73.21",
+        "change": -0.54
+      },
+      {
+        "symbol": "GOLD",
+        "label": "GOLD",
+        "value": "$2,418",
+        "change": 0.22
+      }
+    ]
+  },
+  "newsPayload": {
+    "status": "mock",
+    "items": [
+      {
+        "title": "Rates set the valuation tone",
+        "detail": "Track the direction of long-duration sovereign yields and the dollar before treating equity futures as a durable signal."
+      },
+      {
+        "title": "Asia provides the second read",
+        "detail": "The 05:45 IST refresh captures early Asian breadth and index futures that are unavailable in the primary 03:00 IST collection."
+      },
+      {
+        "title": "Oil remains an inflation transmission channel",
+        "detail": "A sustained crude move can influence domestic inflation expectations, currency sensitivity and sector leadership."
+      },
+      {
+        "title": "Company-specific catalysts dominate active names",
+        "detail": "Earnings, guidance, filings and unusual volume receive more weight than unverified social-media attention."
+      }
+    ]
+  }
+}

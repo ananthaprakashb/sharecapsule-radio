@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://radio.sharecapsule.app/sitemap.xml
