@@ -5,12 +5,12 @@
   "episodeDate": "2026-08-05",
   "displayDate": "05 AUG 2026",
   "generatedAt": "2026-08-05T06:50:10.541Z",
-  "dataCutoff": "05:45 IST",
-  "title": "Global Market Morning",
+  "dataCutoff": "03:15 PT",
+  "title": "U.S. Market Morning",
   "duration": "11:42",
   "audioUrl": "",
-  "summary": "Global risk appetite is steady but selective. Rates, crude oil and the early Asian session form the main cross-asset setup, while high-volume technology and financial names lead the activity watch.",
-  "narration": "Good morning. This is ShareCapsule Radio. Global risk appetite is steady but selective. Rates, crude oil, and the early Asian session form today's main cross asset setup. This demonstration uses illustrative figures and is not live market data. ShareCapsule Radio is provided solely for educational and informational purposes. Nothing in this broadcast is investment, financial, legal, or tax advice. Listeners remain solely responsible for their financial decisions. ShareCapsule Radio and its publishers are not responsible for decisions, trades, losses, or other outcomes based on this broadcast. Please do your own research and consult a qualified financial professional when appropriate.",
+  "summary": "U.S. equity futures, Treasury yields, the dollar and overnight global markets set the pre-market tone, while liquid and volatile U.S.-listed stocks lead the activity watch.",
+  "narration": "Good morning. This is ShareCapsule Radio's U.S. market briefing. U.S. equity futures, Treasury yields, the dollar, and overnight global markets form today's pre-market setup. The active-stock watch prioritizes liquidity, volatility, pre-market movement, options activity, earnings, and verified company news. This demonstration uses illustrative figures and is not live market data. ShareCapsule Radio is provided solely for educational and informational purposes. Nothing in this broadcast is investment, financial, legal, or tax advice. Listeners remain solely responsible for their financial decisions. ShareCapsule Radio and its publishers are not responsible for decisions, trades, losses, or other outcomes based on this broadcast. Please do your own research and consult a qualified financial professional when appropriate.",
   "riskSignal": "BALANCED",
   "markets": [
     {
@@ -26,109 +26,109 @@
       "change": 0.71
     },
     {
-      "symbol": "STOXX",
-      "label": "EURO STOXX",
-      "value": "5,438",
-      "change": -0.18
+      "symbol": "DJI",
+      "label": "DOW JONES",
+      "value": "44,112",
+      "change": 0.16
     },
     {
-      "symbol": "NIKKEI",
-      "label": "NIKKEI",
-      "value": "40,612",
-      "change": 0.36
+      "symbol": "RUT",
+      "label": "RUSSELL 2000",
+      "value": "2,238",
+      "change": -0.24
     },
     {
-      "symbol": "BRENT",
-      "label": "BRENT",
-      "value": "$73.21",
-      "change": -0.54
+      "symbol": "VIX",
+      "label": "VIX",
+      "value": "15.82",
+      "change": -1.18
     },
     {
-      "symbol": "GOLD",
-      "label": "GOLD",
-      "value": "$2,418",
-      "change": 0.22
+      "symbol": "US10Y",
+      "label": "U.S. 10Y YIELD",
+      "value": "4.21%",
+      "change": 0.03
     }
   ],
   "drivers": [
     {
-      "title": "Rates set the valuation tone",
-      "detail": "Track the direction of long-duration sovereign yields and the dollar before treating equity futures as a durable signal."
+      "title": "Treasury yields set the valuation tone",
+      "detail": "Track the U.S. two-year and ten-year yields before treating equity-futures direction as a durable signal."
     },
     {
-      "title": "Asia provides the second read",
-      "detail": "The 05:45 IST refresh captures early Asian breadth and index futures that are unavailable in the primary 03:00 IST collection."
+      "title": "Pre-market breadth tests index strength",
+      "detail": "Compare futures moves with sector breadth, pre-market volume and the equal-weighted market before the opening bell."
     },
     {
-      "title": "Oil remains an inflation transmission channel",
-      "detail": "A sustained crude move can influence domestic inflation expectations, currency sensitivity and sector leadership."
+      "title": "Dollar and crude transmit global risk",
+      "detail": "Moves in the dollar and oil can reshape inflation expectations, multinational earnings sensitivity and sector leadership."
     },
     {
-      "title": "Company-specific catalysts dominate active names",
-      "detail": "Earnings, guidance, filings and unusual volume receive more weight than unverified social-media attention."
+      "title": "Verified company catalysts drive active names",
+      "detail": "Earnings, guidance, SEC filings, analyst actions and unusual volume receive more weight than unverified social-media attention."
     }
   ],
   "signals": [
     {
-      "label": "US breadth",
+      "label": "U.S. futures",
       "value": "MIXED"
     },
     {
-      "label": "Dollar",
+      "label": "Treasury yields",
       "value": "FIRM"
     },
     {
-      "label": "Crude",
-      "value": "SOFTER"
+      "label": "Dollar",
+      "value": "STEADY"
     },
     {
-      "label": "Asia open",
-      "value": "STABLE"
+      "label": "VIX",
+      "value": "LOWER"
     }
   ],
   "stocks": [
     {
-      "symbol": "RELIANCE",
-      "name": "Reliance Industries",
-      "score": 88,
-      "reason": "High turnover, index weight and energy sensitivity place it near the top of the attention queue.",
-      "tags": [
-        "turnover",
-        "oil",
-        "index"
-      ]
-    },
-    {
-      "symbol": "HDFCBANK",
-      "name": "HDFC Bank",
-      "score": 84,
-      "reason": "Liquidity, financial-sector influence and sensitivity to rate expectations support continued monitoring.",
+      "symbol": "NVDA",
+      "name": "NVIDIA",
+      "score": 92,
+      "reason": "High liquidity, options activity and sensitivity to AI and semiconductor news keep it central to the U.S. activity watch.",
       "tags": [
         "volume",
-        "rates",
-        "banking"
+        "volatility",
+        "semiconductors"
       ]
     },
     {
-      "symbol": "TCS",
-      "name": "Tata Consultancy Services",
-      "score": 79,
-      "reason": "Currency moves and global technology sentiment are the principal overnight transmission factors.",
-      "tags": [
-        "technology",
-        "fx",
-        "global"
-      ]
-    },
-    {
-      "symbol": "TATAMOTORS",
-      "name": "Tata Motors",
-      "score": 76,
-      "reason": "Elevated realized volatility and global auto headlines make it a candidate for the morning briefing.",
+      "symbol": "TSLA",
+      "name": "Tesla",
+      "score": 89,
+      "reason": "Elevated realized volatility, heavy retail interest and frequent company-specific catalysts support close monitoring.",
       "tags": [
         "volatility",
-        "auto",
-        "news"
+        "options",
+        "popular"
+      ]
+    },
+    {
+      "symbol": "AAPL",
+      "name": "Apple",
+      "score": 84,
+      "reason": "Index weight, exceptional liquidity and sensitivity to product, supply-chain and regulatory headlines make it market-relevant.",
+      "tags": [
+        "index",
+        "liquidity",
+        "technology"
+      ]
+    },
+    {
+      "symbol": "PLTR",
+      "name": "Palantir Technologies",
+      "score": 81,
+      "reason": "Strong investor attention and above-average volatility make verified contract, earnings and guidance news important.",
+      "tags": [
+        "momentum",
+        "volatility",
+        "software"
       ]
     }
   ]
