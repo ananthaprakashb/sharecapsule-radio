@@ -3,7 +3,8 @@ name: Radio publication
 on:
   schedule:
     - cron: "30 21 * * *" # 03:00 IST next day: primary collection
-    - cron: "15 0 * * *"  # 05:45 IST: Asia refresh and publication preparation
+    - cron: "15 0 * * *"  # 05:45 IST: Asia refresh and episode preparation
+    - cron: "45 0 * * *"  # 06:15 IST: validated publication
   workflow_dispatch:
     inputs:
       stage:
@@ -54,8 +55,10 @@ jobs:
             stage="${{ inputs.stage }}"
           elif [[ "${{ github.event.schedule }}" == "30 21 * * *" ]]; then
             stage="primary"
+          elif [[ "${{ github.event.schedule }}" == "15 0 * * *" ]]; then
+            stage="refresh"
           else
-            stage="all"
+            stage="publish"
           fi
           echo "stage=$stage" >> "$GITHUB_OUTPUT"
 

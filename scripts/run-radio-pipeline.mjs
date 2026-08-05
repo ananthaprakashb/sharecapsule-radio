@@ -14,6 +14,21 @@ const config = JSON.parse(await readFile(path.join(root, "config/publication.jso
 const latestPath = path.join(root, "data/latest-episode.json");
 const current = JSON.parse(await readFile(latestPath, "utf8"));
 const mode = process.env.RADIO_MODE ?? "mock";
+const now = new Date();
+const dateParts = new Intl.DateTimeFormat("en-CA", {
+  timeZone: config.timezone,
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+}).formatToParts(now);
+const part = (type) => dateParts.find((item) => item.type === type)?.value;
+const episodeDate = `${part("year")}-${part("month")}-${part("day")}`;
+const displayDate = new Intl.DateTimeFormat("en-GB", {
+  timeZone: config.timezone,
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+}).format(now).toUpperCase();
 
 const required = (name) => {
   const value = process.env[name];
@@ -27,6 +42,20 @@ const getJson = async (url, token) => {
     signal: AbortSignal.timeout(20_000),
   });
   if (!response.ok) throw new Error(`Provider request failed with HTTP ${response.status}`);
+  return response.json();
+};
+
+const postJson = async (url, token, body) => {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+    body: JSON.stringify(body),
+    signal: AbortSignal.timeout(60_000),
+  });
+  if (!response.ok) throw new Error(`Production adapter failed with HTTP ${response.status}`);
   return response.json();
 };
 
@@ -52,7 +81,7 @@ const collectProduction = async () => {
 };
 
 const writeEvidence = async (payload) => {
-  const runDirectory = path.join(root, "data/runs", current.episodeDate);
+  const runDirectory = path.join(root, "data/runs", episodeDate);
   await mkdir(runDirectory, { recursive: true });
   await writeFile(
     path.join(runDirectory, "evidence.json"),
@@ -86,7 +115,28 @@ const publishFeed = async (episode) => {
   await writeFile(path.join(root, "public/feed.xml"), feed);
 };
 
-let next = { ...current, generatedAt: new Date().toISOString(), mode };
+const buildProductionEpisode = async (evidence) => {
+  const draft = await postJson(
+    required("SCRIPT_GENERATOR_URL"),
+    process.env.SCRIPT_GENERATOR_TOKEN,
+    { evidence, publication: config, episodeDate },
+  );
+  const audio = await postJson(
+    required("TTS_URL"),
+    process.env.TTS_TOKEN,
+    { title: draft.title, narration: draft.narration, episodeDate },
+  );
+  if (!audio.audioUrl) throw new Error("TTS adapter did not return audioUrl");
+  return { ...draft, ...audio };
+};
+
+let next = {
+  ...current,
+  episodeDate,
+  displayDate,
+  generatedAt: now.toISOString(),
+  mode,
+};
 
 if (stage === "primary" || stage === "all") {
   const evidence = mode === "production" ? await collectProduction() : {
@@ -98,14 +148,34 @@ if (stage === "primary" || stage === "all") {
 }
 
 if (stage === "refresh" || stage === "all") {
-  next = { ...next, dataCutoff: "05:45 IST" };
+  if (mode === "production") {
+    const evidence = await collectProduction();
+    await writeEvidence(evidence);
+    next = {
+      ...next,
+      ...(await buildProductionEpisode(evidence)),
+      episodeDate,
+      displayDate,
+      generatedAt: now.toISOString(),
+      dataCutoff: "05:45 IST",
+      mode: "production",
+    };
+  } else {
+    next = { ...next, dataCutoff: "05:45 IST" };
+  }
   console.log("Asia and cross-asset refresh completed.");
 }
 
-validateEpisode(next);
-await writeFile(latestPath, `${JSON.stringify(next, null, 2)}\n`);
+if (stage === "refresh" || stage === "all") {
+  validateEpisode(next);
+  await writeFile(latestPath, `${JSON.stringify(next, null, 2)}\n`);
+}
 
 if (stage === "publish" || stage === "all") {
-  await publishFeed(next);
-  console.log(next.audioUrl ? "Publication artifacts created." : "Publication held at the audio quality gate.");
+  const publishable = stage === "publish"
+    ? JSON.parse(await readFile(latestPath, "utf8"))
+    : next;
+  validateEpisode(publishable);
+  await publishFeed(publishable);
+  console.log(publishable.audioUrl ? "Publication artifacts created." : "Publication held at the audio quality gate.");
 }

@@ -1,6 +1,6 @@
 # ShareCapsule Radio
 
-ShareCapsule Radio is a morning-market audio interface and publication pipeline for `radio.sharecapsule.app`. It is designed around a 03:00 IST primary collection, a 05:45 IST Asian-market refresh, and a 06:15 IST publication target.
+ShareCapsule Radio is a morning-market audio interface and publication pipeline for `radio.sharecapsule.app`. It runs a 03:00 IST primary collection, a 05:45 IST Asian-market refresh and episode build, and a separate 06:15 IST publication gate.
 
 ## What is included
 
@@ -9,7 +9,7 @@ ShareCapsule Radio is a morning-market audio interface and publication pipeline 
 - Provider-neutral market-data and news collection endpoints
 - Evidence archive for every pipeline run
 - Podcast RSS generation guarded by a verified audio URL
-- GitHub Actions schedules for the two morning collection windows
+- GitHub Actions schedules for primary collection, Asia refresh and validated publication
 - CI checks for the site and publication contract
 
 ## Local development
